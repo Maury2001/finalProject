@@ -1,0 +1,49 @@
+{% extends 'Accounts/base.html' %} {% block content %}
+
+<br>
+
+<button type="button" class="btn btn-outline-success ">Create Work Order</button>
+
+<br>
+<br>
+<hr>
+
+
+<table class="table caption-top border border-success">
+  <caption>
+    Total Work Orders
+  </caption>
+
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Customer Name</th>
+      <th scope="col">Device</th>
+      <th scope="col">Problem Description</th>
+      <th scope="col">Status</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+{% for order in workorder %}
+
+  <tr>
+      
+    <td>{{i.id}}</td>
+    <td>{{order.name}}</td>
+    <td>{{order.device}}</td>
+    <td>{{order.description}}</td>
+    <td>{{order.status}}</td>
+    <td>{{order.price}}</td>
+    
+  </tr>
+ 
+
+
+{% endfor %}
+
+  </tbody>
+</table>
+
+{% endblock content %}

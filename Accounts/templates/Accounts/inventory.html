@@ -1,0 +1,41 @@
+{% extends 'Accounts/base.html' %}
+
+{% block content %}
+
+<br>
+
+<button type="button" class="btn btn-outline-success ">Inventory Adjustments</button>
+
+<br>
+<hr>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Category</th>
+        <th scope="col">Price</th>
+        <th scope="col">Date Added</th>
+      </tr>
+    </thead>
+    <tbody>
+     {% for i in inventory %}
+     
+     <tr>
+        <td> {{i.id}}</td>
+        <td> {{i.name}}</td>
+        <td> {{i.description}}</td>
+        <td> {{i.category}}</td>
+        <td> {{i.price}}</td>
+        <td> {{i.date}}</td>
+     </tr>
+     
+     
+     {% endfor %}
+      
+    </tbody>
+  </table>
+
+{% endblock content %}

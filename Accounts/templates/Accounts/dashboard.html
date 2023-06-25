@@ -1,0 +1,119 @@
+{% extends 'Accounts/base.html' %}
+
+{% block content %}
+
+<br>
+
+<h3> <span>Welcome </span> </h3>
+
+<br>
+
+  <div class='row'>
+    <div class='col'>
+        <div class="card">
+            <div class="card-header">
+              WORK ORDERS
+            </div>
+            <div class="card-body">
+              <form class="d-flex card-title">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Device</th>
+                    <th scope="col">Service</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                    
+                  </tr>
+                </tbody>
+              </table>
+              <p class="card-text">.</p>
+              <a href="#" class="btn btn-primary">Create Work Order</a>
+            </div>
+          </div>   
+        
+      </div>
+      <div class='col'>
+        <div class="card">
+            <div class="card-header">
+              PENDING WORK ORDER
+            </div>
+            <div class="card-body">
+                <form class="d-flex card-title">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                  </form>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Device</th>
+                        <th scope="col">Service</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                        
+                      </tr>
+                    </tbody>
+                  </table>
+              <p class="card-text"></p>
+              <a href="#" class="btn btn-primary">Edit</a>
+            </div>
+          </div>   
+        
+      </div>
+
+      <div class='col'>
+        <div class="card">
+            <div class="card-header">
+              COMPLETED WORK ORDERS
+            </div>
+            <div class="card-body">
+              
+                <form class="d-flex card-title">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                  </form>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Device</th>
+                        <th scope="col">Service</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                        
+                      </tr>
+                    </tbody>
+                  </table>
+
+                <a href="#" class="btn btn-primary">View</a>
+            </div>
+          </div>   
+        
+      </div>
+
+  </div>
+
+{% endblock content %}
