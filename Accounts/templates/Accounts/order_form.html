@@ -1,0 +1,30 @@
+{% extends 'Accounts/base.html' %} {% block content %}
+
+
+<div class="card w-75 position-absolute top-50 start-50 translate-middle shadow-lg p-3 mb-5 bg-body rounded">
+    <div class="card-header">
+      Create Work Order
+    </div>
+    <div class="card-body">
+
+        <form action="" method="POST">
+            {% csrf_token %} 
+            
+            <div class='form-group'>
+              {{form}}
+            </div>
+            
+          <br>
+            <div class='form-group'>
+              <input type="submit" name="submit" />
+            </div>
+          
+            
+          </form>
+     
+    </div>
+  </div>
+
+
+
+{% endblock content %}
