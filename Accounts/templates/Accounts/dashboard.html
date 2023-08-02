@@ -1,119 +1,297 @@
-{% extends 'Accounts/base.html' %}
+{% extends 'Accounts/base.html' %} {% load static %} {% block content %}
 
-{% block content %}
 
-<br>
+{% comment %} {% if user.is_authenticated and user.is_staff %} {% endcomment %}
+<br />
 
-<h3> <span>Welcome </span> </h3>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h3 class="h3 mb-0 text-gray-800 text-uppercase">
+    Hello <span>{{request.user}}</span>
+  </h3>
+  {% comment %} <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+    ><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a
+  > {% endcomment %}
 
-<br>
+  <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+    <i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
 
-  <div class='row'>
-    <div class='col'>
-        <div class="card">
-            <div class="card-header">
-              WORK ORDERS
-            </div>
-            <div class="card-body">
-              <form class="d-flex card-title">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">Customer Name</th>
-                    <th scope="col">Device</th>
-                    <th scope="col">Service</th>
-                    <th scope="col">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    
-                  </tr>
-                </tbody>
-              </table>
-              <p class="card-text">.</p>
-              <a href="#" class="btn btn-primary">Create Work Order</a>
-            </div>
-          </div>   
+  <div class="offcanvas offcanvas-end top-50 start-50 translate-middle" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <h5 id="offcanvasRightLabel"><a href="" class='btn btn-outline-primary'>REPORT 
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+          <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+          <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
+        </svg>
+      </a></h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="list-group border border-primary">
+        <li class="list-group-item">Total Work Orders <span>{{total_orders}}</span></li>
+        <li class="list-group-item">Pending Work Orders <span>{{pending}}</span></li>
+        <li class="list-group-item">Completed Work Orders <span>{{completed}}</span></li>
+        <li class="list-group-item">Total Inventory <span>{{total_inventory}}</span></li>
+        <li class="list-group-item">Total Customers <span>{{customer_count}}</span></li>
         
-      </div>
-      <div class='col'>
-        <div class="card">
-            <div class="card-header">
-              PENDING WORK ORDER
-            </div>
-            <div class="card-body">
-                <form class="d-flex card-title">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                  </form>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">id</th>
-                        <th scope="col">Customer Name</th>
-                        <th scope="col">Device</th>
-                        <th scope="col">Service</th>
-                        <th scope="col">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row"></th>
-                        <td></td>
-                        
-                      </tr>
-                    </tbody>
-                  </table>
-              <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">Edit</a>
-            </div>
-          </div>   
-        
-      </div>
-
-      <div class='col'>
-        <div class="card">
-            <div class="card-header">
-              COMPLETED WORK ORDERS
-            </div>
-            <div class="card-body">
-              
-                <form class="d-flex card-title">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                  </form>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">id</th>
-                        <th scope="col">Customer Name</th>
-                        <th scope="col">Device</th>
-                        <th scope="col">Service</th>
-                        <th scope="col">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row"></th>
-                        <td></td>
-                        
-                      </tr>
-                    </tbody>
-                  </table>
-
-                <a href="#" class="btn btn-primary">View</a>
-            </div>
-          </div>   
-        
-      </div>
-
+      </ul>
+    </div>
   </div>
 
+</div>
+
+<br />
+<div class="row">
+  <!-- Earnings (Monthly) Card Example -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-primary shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div
+              class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+            >
+              Pending Work Orders
+            </div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">
+              {{pending}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Earnings (Monthly) Card Example -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-success shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div
+              class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+            >
+              Completed Work Orders
+            </div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">
+              {{completed}}
+            </div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Earnings (Monthly) Card Example -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-info shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+              INVENTORY
+            </div>
+            <div class="row no-gutters align-items-center">
+              <div class="col-auto">
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                  {{total_inventory}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pending Requests Card Example -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-warning shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div
+              class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+            >
+              Total Customers
+            </div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">
+              {{customer_count}}
+            </div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-comments fa-2x text-gray-300"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col">
+    <div class="card border-left-primary shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div
+              class="text-xs font-weight-bold text-primary text-uppercase text-center mb-1 align-middle d-flex justify-content-evenly"
+            >
+              <a
+                href="{% url 'workorder' %}"
+                class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm"
+                >Total Work Orders
+              </a>
+              <h3>{{total_orders}}</h3>
+              <a href="{% url 'orderform' %}" class="btn btn-outline-primary">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-plus-lg"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
+                  />
+                </svg>
+                New</a
+              >
+            </div>
+            <table class="table overflow-auto h-100">
+              <thead class="text-primary">
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">Customer Name</th>
+                  <th scope="col">Device</th>
+                  <th scope="col">Service</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for order in orders %}
+
+                <tr>
+                  <td>{{order.id}}</td>
+                  <td>{{order.customer.name}}</td>
+                  <td>{{order.device}}</td>
+                  <td>{{order.description}}</td>
+                  <td>{{order.status}}</td>
+                  <td>{{order.price}}</td>
+                </tr>
+
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-8 col-lg-7 m-5">
+    <div class="card shadow mb-4">
+      <!-- Card Header - Dropdown -->
+      <div
+        class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+      >
+        <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="chart-area">
+          <canvas id="myAreaChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <br />
+
+  <div class="row d-flex m-5">
+    <div class="col">
+      <div class="card shadow mb-4 border-primary border-top-0">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Announcements!!</h6>
+        </div>
+        <div class="card-body">
+          <p class="fs-5">
+            YOU'RE ALL FIRED 😊
+          </p>
+          <div class="card-footer">
+            <span>From Management</span>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div
+        class="card shadow p-3 mb-5 bg-body rounded border-left-primary h-100"
+      >
+        <div class="card-header">
+          <a
+            href="{% url 'allcustomers' %}"
+            class="btn btn-outline-primary d-flex justify-content-center"
+            >CUSTOMERS</a
+          >
+        </div>
+        <div class="card-body">
+          <table class="table overflow-auto">
+            <thead class="text-primary">
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">Customer Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for customer in customer %}
+
+              <tr>
+                <td>
+                  <a
+                    href="{% url 'customer' customer.id %}"
+                    class="btn btn-outline-primary btn-sm"
+                    >View</a
+                  >
+                </td>
+
+                <td>{{customer.name}}</td>
+                <td>{{customer.phone}}</td>
+                <td>{{customer.email}}</td>
+              </tr>
+
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% comment %} {% else %} {% endcomment %}
+  {% comment %} <span> Unauthorized User</span> {% endcomment %}
+
+  {% comment %} {% endif %} {% endcomment %}
+
+  
+</div>
+
 {% endblock content %}
+
+
+
