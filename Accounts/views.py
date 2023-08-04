@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import *
 from django.db import models
 from .decorators import unauthenticated_user, allowed_user,admin_only
-from .forms import WorkOrderForm, CreateuserForm, InventoryForm, CustomerForm
+from .forms import WorkOrderForm, CreateuserForm, InventoryForm, CustomerForm,OrderForm
 from .filters import Orderfilter, Inventoryfilter, CustomerFilter, OrderFilter
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -101,9 +101,10 @@ def allCustomers(request):
 @login_required(login_url='login')
 def customer(request, pk):
     customer = Customer.objects.get(id= pk)
+    order = WorkOrder.objects.filter(id= pk)
    
     orders = WorkOrder.objects.all()
-    orders_count = orders.count()
+    order_count = order.count()
     
 
     myfilter = Orderfilter(request.GET, queryset=orders)
@@ -113,7 +114,8 @@ def customer(request, pk):
 
     context = {'customer': customer,
                'orders': orders,
-               'order_count': orders_count,
+               'order': order,
+               'order_count': order_count,
                'myfilter': myfilter,
                }
     #
@@ -159,14 +161,12 @@ def workorder(request):
 
 @login_required(login_url='login')
 def createorder(request, pk):
-
     customer = Customer.objects.get(id=pk)
     form = WorkOrderForm(initial={'customer': customer})
 
     if request.method == 'POST':
-        # print ('printing request:' ,request.POST)
         form = WorkOrderForm(request.POST)
-        if form.is_valid():
+        if form.is_valid():  # Check if the form is valid
             form.save()
             return redirect('/')
 
@@ -193,6 +193,7 @@ def createorder2(request):
 
 
 @login_required(login_url='login')
+@allowed_user(allowed_roles = ['admin'])
 def updateOrder(request, pk):
     order = WorkOrder.objects.get(id=pk)
     form = WorkOrderForm(instance=order)
@@ -217,6 +218,7 @@ def delete(request, pk):
     return render(request, 'Accounts/delete.html', context)
 
 @login_required(login_url='login')
+@allowed_user(allowed_roles = ['admin'])
 def createOrder(request):
 
     form = WorkOrderForm()
@@ -233,8 +235,20 @@ def createOrder(request):
 
 
 def base(request):
+    workorder = WorkOrder.objects.all()
+    myfilter = OrderFilter(request.GET, queryset=workorder)
+    workorder = myfilter.qs
 
-    return render(request, 'Accounts/base2.html')
+    myform = OrderForm()
+    if request.method == 'POST':
+        form = WorkOrderForm()
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context={'workorder':workorder, 'myfilter': myfilter,'myform':myform}
+
+    return render(request, 'Accounts/base3.html',context)
 
 
 def index(request):
@@ -267,6 +281,12 @@ def UserPage(request):
     form = CustomerForm(instance= customer)
     pending = orders.filter(status='pending').count()
     completed = orders.filter(status='repair in progress').count()
+
+    if request.method == 'POST':
+        form =CustomerForm(request.POST, request.FILES, instance= customer)
+        if form.is_valid():
+            form.save()
+            return redirect('user')
 
     print('orders' , orders)
     context = {'orders': orders ,

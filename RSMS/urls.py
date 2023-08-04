@@ -20,15 +20,30 @@ from Accounts import views as acc_views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.db import models
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', acc_views.dashboard, name='dashboard'),
-    path('customer/<str:pk_test>/', acc_views.customer, name='customer'),
+    path('customer/<str:pk>/', acc_views.customer, name='customer'),
     path('inventory/', acc_views.inventory, name='inventory'),
+    path('register/', acc_views.registration, name='register'),
+    path('login/', acc_views.Login, name='login'),
+    path('logout/', acc_views.LogoutPage, name='logout'),
+    path('base/', acc_views.base, name='base'),
+    path('index/', acc_views.index, name='index'),
+    path('dash/', acc_views.dash, name='dash'),
+    path('user/', acc_views.UserPage, name='user'),
+    path('engineer/', acc_views.engineer, name='engineer'),
+    
     path('workorder/', acc_views.workorder, name='workorder'),
-    path('createorder/', acc_views.createorder, name='createorder'),
+    path('inventoryadj/', acc_views.InventoryAdjustment, name='inventoryadj'),
+    path('allcustomers/', acc_views.allCustomers, name='allcustomers'),
+    path('createorder/<str:pk>/', acc_views.createorder, name='createorder'),
+    path('createorder/', acc_views.createorder2, name='createorder2'),
+    path('order_form/', acc_views.createOrder, name='orderform'),
+    path('update_form/<str:pk>/', acc_views.updateOrder, name='updateorder'),
+    path('delete/<str:pk>/', acc_views.delete, name='delete'),
 
 ]
 # <str:pk_test>/

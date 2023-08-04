@@ -153,7 +153,7 @@
           <div class="card-body">
             <caption class=""></caption>
   
-            <p><strong>{{customer.total_count}}</strong></p>
+            <p><strong>{{order_count}}</strong></p>
   
           </div>
         </div>
@@ -163,41 +163,6 @@
    
   </div>
   <br />
-  <form method='GET'>
-    {{myfilter.form}}
-
-    <button class='' type='submit'>search</button>
-  </form>
-  <hr>
-
-  {% comment %} <table class="table caption-top border border-success">
-    <caption>
-      Repairs
-    </caption>
-
-    <thead>
-      <tr>
-        <th scope="col">id</th>
-        <th scope="col">Customer Name</th>
-        <th scope="col">Device</th>
-        <th scope="col">Problem Description</th>
-        <th scope="col">Status</th>
-        <th scope="col">Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for order in orders %}
-      <tr>
-        <td>{{order.id}}</td>
-        <td>{{order.customer}}</td>
-        <td>{{order.device}}</td>
-        <td>{{order.description}}</td>
-        <td>{{order.status}}</td>
-        <td>{{order.price}}</td>
-      </tr>
-
-      {% endfor %}
-    </tbody>
-  </table> {% endcomment %}
+ 
 </div>
 {% endblock content %}
